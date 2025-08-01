@@ -1,8 +1,12 @@
 package com.cepsearch.cep_search_application.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.cepsearch.cep_search_application.model.ConsultCepLog;
@@ -15,10 +19,12 @@ public class ConsultCepLogService {
     private ConsultCepLogRepository consultaLogRepository;
 
     public ConsultCepLog saveLog(ConsultCepLog log) {
-        return consultaLogRepository.save(saveLog(log));
+        log.setDataConsulta(LocalDateTime.now());
+        return consultaLogRepository.save(log);
     }
 
-    public List<ConsultCepLog> getAllLogs() {
-        return consultaLogRepository.findAll();
+    public Page<ConsultCepLog> getAllLogs(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return consultaLogRepository.findAll(pageable);
     }
 }

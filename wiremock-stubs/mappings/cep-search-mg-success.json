@@ -1,0 +1,25 @@
+{
+  "priority": 1,
+  "request": {
+    "method": "GET",
+    "urlPath": "/ws/30140010/json/"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "cep": "30140-010",
+      "logradouro": "Praça da Liberdade",
+      "complemento": "",
+      "bairro": "Funcionários",
+      "localidade": "Belo Horizonte",
+      "uf": "MG",
+      "ibge": "3106200",
+      "gia": "",
+      "ddd": "31",
+      "siafi": "4091"
+    }
+  }
+}
