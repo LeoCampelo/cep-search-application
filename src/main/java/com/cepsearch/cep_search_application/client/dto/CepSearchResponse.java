@@ -1,8 +1,12 @@
 package com.cepsearch.cep_search_application.client.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class CepSearchResponse {
     
     private String cep;
