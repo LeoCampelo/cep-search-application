@@ -1,5 +1,7 @@
 package com.cepsearch.cep_search_application.controller;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,9 +22,22 @@ public class ConsultCepLogController {
 
     @GetMapping
     public Page<ConsultCepLog> getConsultAllLogs(
-        @RequestParam(defaultValue = "0") int page,
-        @RequestParam(defaultValue = "10") int size
-    ) {
+                        @RequestParam(defaultValue = "0") int page,
+                        @RequestParam(defaultValue = "10") int size) {
+
         return cepLogService.getAllLogs(page, size);
+    }
+
+    @GetMapping("/by-date")
+    public Page<ConsultCepLog> getLogsByDateRange(
+                        @RequestParam("start") String start,
+                        @RequestParam("end") String end,
+                        @RequestParam(defaultValue = "0") int page,
+                        @RequestParam(defaultValue = "10") int size) {
+        
+        LocalDateTime startDate = LocalDateTime.parse(start);
+        LocalDateTime endDate = LocalDateTime.parse(end);
+        
+        return cepLogService.getLogsByDateRange(startDate, endDate, page, size);
     }
 }

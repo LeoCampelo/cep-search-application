@@ -15,15 +15,20 @@ import com.cepsearch.cep_search_application.repository.ConsultCepLogRepository;
 public class ConsultCepLogService {
     
     @Autowired
-    private ConsultCepLogRepository consultaLogRepository;
+    private ConsultCepLogRepository consultCepLogRepository;
 
     public ConsultCepLog saveLog(ConsultCepLog log) {
         log.setDataConsulta(LocalDateTime.now());
-        return consultaLogRepository.save(log);
+        return consultCepLogRepository.save(log);
     }
 
     public Page<ConsultCepLog> getAllLogs(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
-        return consultaLogRepository.findAll(pageable);
+        return consultCepLogRepository.findAll(pageable);
+    }
+
+    public Page<ConsultCepLog> getLogsByDateRange(LocalDateTime start, LocalDateTime end, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return consultCepLogRepository.findByDataConsultaBetween(start, end, pageable);
     }
 }
