@@ -1,0 +1,209 @@
+{
+	"info": {
+		"_postman_id": "0dcddbda-a4cc-494a-86fe-9f9affd51a78",
+		"name": "CEP Search Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "47238027",
+		"_collection_link": "https://leocamp-5188042.postman.co/workspace/Leo's-Workspace~37bb028e-b068-4610-854f-2a5090f790e6/collection/47238027-0dcddbda-a4cc-494a-86fe-9f9affd51a78?action=share&source=collection_link&creator=47238027"
+	},
+	"item": [
+		{
+			"name": "Authorization",
+			"item": [
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\" : \"user\",\r\n    \"password\" : \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://3.208.13.113:8081/api/user/create",
+							"protocol": "http",
+							"host": [
+								"3",
+								"208",
+								"13",
+								"113"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"user",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Token Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\" : \"user\",\r\n    \"password\" : \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://3.208.13.113:8081/login",
+							"protocol": "http",
+							"host": [
+								"3",
+								"208",
+								"13",
+								"113"
+							],
+							"port": "8081",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CEP Search",
+			"item": [
+				{
+					"name": "CEP Search",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNzU0MjQ0ODYwfQ.oHjaep_gAHR_rAQnoar1xprt-lFAjyl3REWnFSodQ-AAb7CDic1bfafr2QmmEuzwMzQql-fkvx_C1edWjJdDPA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://3.208.13.113:8081/api/cep/99999999",
+							"protocol": "http",
+							"host": [
+								"3",
+								"208",
+								"13",
+								"113"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"cep",
+								"99999999"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Log History",
+			"item": [
+				{
+					"name": "Log History Pageable",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNzU0MjQ0ODYwfQ.oHjaep_gAHR_rAQnoar1xprt-lFAjyl3REWnFSodQ-AAb7CDic1bfafr2QmmEuzwMzQql-fkvx_C1edWjJdDPA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://3.208.13.113:8081/api/cep/log?page=0&size=10",
+							"protocol": "http",
+							"host": [
+								"3",
+								"208",
+								"13",
+								"113"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"cep",
+								"log"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Log History By Date&Time",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNzU0MjQ0ODYwfQ.oHjaep_gAHR_rAQnoar1xprt-lFAjyl3REWnFSodQ-AAb7CDic1bfafr2QmmEuzwMzQql-fkvx_C1edWjJdDPA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://3.208.13.113:8081/api/cep/log/by-date?start=2025-08-02T10:00:00&end=2025-08-31T10:00:00&page=0&size=10",
+							"protocol": "http",
+							"host": [
+								"3",
+								"208",
+								"13",
+								"113"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"cep",
+								"log",
+								"by-date"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "2025-08-02T10:00:00"
+								},
+								{
+									"key": "end",
+									"value": "2025-08-31T10:00:00"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
