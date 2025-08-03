@@ -50,6 +50,31 @@ O diagrama do funcionamento da aplicação:
 
 Atualmente tanto a aplicação como o container Docker com o WireMock estão sendo executados na mesma instância do EC2 (idealmente o Service se comunica com a API externa, porém, para os requisitos do desafio, a API externa está representada dessa forma).
 
+## Padrão SOLID  
+
+O projeto segue o padrão de design SOLID nos seguintes quesitos:
+- S (Princípio da Responsabilidade Única): Com a divisão clara de responsabilidades e funções em cada módulo:
+    - `controller`: Responsável por requisições HTTP
+    - `service`: Responsável pela lógica de negócio e validações
+    - `repository`: Responsável pela camada de interação de bando de dados
+    - `security`: Responsável pela camada de segurança e autenticação
+- O (Princípio do Aberto/Fechado): A lógica de serviço, por exemplo, pode representa:
+    - Aberto para: Utilização de outras APIs externas sem alteração no código e na lógica
+- L (Princípio da Substituição de Liskov): Não foi aplicado, não há classes que implementam interfaces nesse projeto
+- I (Princípio da Segregação de Interfaces): No módulo `repository` temos a extenção de `JPARepository`, recebendo assim diversos métodos e funcionalidade sem sbrecarregar a classe mãe. Outro exemplo é `UserDetailData` que implementa com foco os métodos necessários de `UserDetail`
+- D (Princípio da Inversão de Dependência): Com a utilização de `@Autowired` para injeção de Beans, assim dependendo de abstrações de outras classes ou interfaces e não de implementações diretas na classe
+
+## Padrão de Commits
+
+Foi utilizado o seguinte padrão para branches e commits, facilitando possíveis code reviews se necessário, ambos em inglês
+
+Nomeação de branches: `<tipo>/<descricao-da-tarefa>` e mensagem de commit: `<tipo>: <descrição do que foi feito>` 
+
+Sendo os tipos:
+- `feat`: Uma nova funcionalidade
+- `fix`: Uma correção de bug
+- `docs`: Manutenção na documentação
+
 ## Endpoints
 
 Com a implementação de autorização via token, é necessário realizar cadastro/login antes de utilizar as chamadas para busca de CEP e histórico de logs.
@@ -67,7 +92,7 @@ Necessário o corpo em JSON:
 ```
 {
     "login" : "user",
-    "passwod" : "password"
+    "password" : "password"
 }
 ```
 
