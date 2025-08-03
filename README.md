@@ -101,7 +101,7 @@ Exemplo de retorno:
 {
     "id" : "1",
     "login" : "user",
-    "passwod" : "$2a$10$RD8Y7djOOataYs.s8tqGV.fuYEeUyOzlpuIOS1TF7VpmiMgkbvywG"
+    "password" : "$2a$10$RD8Y7djOOataYs.s8tqGV.fuYEeUyOzlpuIOS1TF7VpmiMgkbvywG"
 }
 ```
 Token com expiração de 10 minutos.  
@@ -116,7 +116,7 @@ Necessário corpo em JSON:
 ```
 {
     "login" : "user",
-    "passwod" : "password"
+    "password" : "password"
 }
 ```
 
