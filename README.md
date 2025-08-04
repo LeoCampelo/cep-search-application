@@ -38,17 +38,17 @@ Além de algumas configurações adicionais como:
 
 ## Arquitetura
 
-A arquitetura utilizada foi a clássica MVC (Model-View-Controller) por razões práticas, estruturais e de manutenibilidade. A baixa complexidade da proposta do projeto, junto a praticidade de aplicar tal arquietura nesse contexto foram motivos que levaram a escolha dessa, a boa separações de estruturas, testabilidade e possibilidade de evolução e melhorias se tornam bons prós para aplicar o MVC.
+A arquitetura utilizada foi a clássica MVC (Model-View-Controller) por razões práticas, estruturais e de manutenibilidade. A baixa complexidade da proposta do projeto, junto à praticidade de aplicar tal arquitetura nesse contexto foram motivos que levaram à escolha dessa, a boa separação de estruturas, testabilidade e possibilidade de evolução e melhorias se tornam bons prós para aplicar o MVC.
 
-Porém também é importante entender as limitações e contras ao utilizar essa arquitetura, como:
+Porém também é importante entender as limitações e contras que podem aparecer ao utilizar essa arquitetura, como:
 - Maior acoplamento, o que pode dificultar a manutenção sem um bom entendimento da estrutura do projeto.
-- Dificuldade em substituir partes do sistema, pois em uma arquitetura Monolito é comum vermos casos onde o alto acoplamento leva a consequencias indesejadas ao alterar trechos de código com alto impacto em outras funcionalidade.
+- Dificuldade em substituir partes do sistema, pois em uma arquitetura monolítica é comum vermos casos onde o alto acoplamento leva a consequências indesejadas ao alterar trechos de código com alto impacto em outras funcionalidades.
 - Escalabilidade comprometida, visto que se trata de um sistema Monolito, a escalabilidade pode se tornar um recurso caro e ineficiente, o que reduz a resiliência da aplicação.
 
 O diagrama do funcionamento da aplicação:
 ![Diagrama da arquitetura](docs/DiagramaCEPSearch.png)
 
-Atualmente tanto a aplicação como o container Docker com o WireMock estão sendo executados na mesma instância do EC2 (idealmente o Service se comunica com a API externa, porém, para os requisitos do desafio, a API externa está representada dessa forma).
+Atualmente tanto a aplicação quanto o container Docker com o WireMock estão sendo executados na mesma instância do EC2 (idealmente o `service` se comunica com a API externa, porém, para os requisitos do desafio, a API externa está representada dessa forma).
 
 ## Padrão SOLID  
 
@@ -56,12 +56,12 @@ O projeto segue o padrão de design SOLID nos seguintes quesitos:
 - S (Princípio da Responsabilidade Única): Com a divisão clara de responsabilidades e funções em cada módulo:
     - `controller`: Responsável por requisições HTTP
     - `service`: Responsável pela lógica de negócio e validações
-    - `repository`: Responsável pela camada de interação de bando de dados
+    - `repository`: Responsável pela camada de interação de banco de dados
     - `security`: Responsável pela camada de segurança e autenticação
-- O (Princípio do Aberto/Fechado): A lógica de serviço, por exemplo, pode representa:
+- O (Princípio do Aberto/Fechado): A lógica de serviço, por exemplo, pode representar:
     - Aberto para: Utilização de outras APIs externas sem alteração no código e na lógica
-- L (Princípio da Substituição de Liskov): Não foi aplicado, não há classes que implementam interfaces nesse projeto
-- I (Princípio da Segregação de Interfaces): No módulo `repository` temos a extenção de `JPARepository`, recebendo assim diversos métodos e funcionalidade sem sbrecarregar a classe mãe. Outro exemplo é `UserDetailData` que implementa com foco os métodos necessários de `UserDetail`
+- L (Princípio da Substituição de Liskov): Não foi aplicado; não há classes que implementam interfaces nesse projeto
+- I (Princípio da Segregação de Interfaces): No módulo `repository` temos a extensão de `JPARepository`, recebendo assim diversos métodos e funcionalidades sem sobrecarregar a classe mãe. Outro exemplo é `UserDetailData` que implementa com foco os métodos necessários de `UserDetail`
 - D (Princípio da Inversão de Dependência): Com a utilização de `@Autowired` para injeção de Beans, assim dependendo de abstrações de outras classes ou interfaces e não de implementações diretas na classe
 
 ## Padrão de Commits
@@ -78,7 +78,7 @@ Sendo os tipos:
 ## Endpoints
 
 Com a implementação de autorização via token, é necessário realizar cadastro/login antes de utilizar as chamadas para busca de CEP e histórico de logs.
-Como a aplicação está hospedada em núvem, é possível realizar chamadas seguindo o domínio da instância EC2 ou executando localmente na porta 8081:  
+Como a aplicação está hospedada em nuvem, é possível realizar chamadas seguindo o domínio da instância EC2 ou executando localmente na porta 8081:  
   
 Local: `http://localhost:8081`  
 AWS: `http://3.208.13.113:8081`
@@ -193,16 +193,16 @@ Retorno:
 
 ## Collection
 
-A ferramenta utilizada para testar as requisições e respostas nesse projeto foi o Postaman, as collections utilizadas estam disponibilizadas em /docs/collections na raiz do projeto.
+A ferramenta utilizada para testar as requisições e respostas nesse projeto foi o Postman, as collections utilizadas estão disponibilizadas em /docs/collections na raiz do projeto.
 
 ## Possíveis Melhorias
 
-Dado o tempo curto para realização do projeto, várias features interessantes ainda não foram implementadas, porém estarão listadas para possíveis melhorias no projeto ao longo do tempo.
+Dado o tempo curto para a realização do projeto, várias features interessantes ainda não foram implementadas, porém estarão listadas para possíveis melhorias no projeto ao longo do tempo.
 
 ### View e Respostas as Requisições
 
 A aplicação é puramente back-end e não possui implementação da camada View com uma interface para o usuário utilizar a aplicação com maior facilidade, além de um tratamento de respostas das URLs mais detalhado. Temos então:
-- Possível interface para utlização da API
+- Possível interface para utilização da API
 - Melhorar as respostas retornadas das requisições HTTP
 
 ### Segurança 
@@ -210,27 +210,27 @@ A aplicação é puramente back-end e não possui implementação da camada View
 Apesar da implementação de token de segurança nas URLs de pesquisa, ainda se faz necessário:
 - Validações de entrada para evitar dados mal formatados
 - Remover as senhas inseridas diretamente no código
-- Melhorar tratamento de exceções
+- Melhorar o tratamento de exceções
 
 ### Testes
 
-No momento apenas o módulo de serviço (responsável pelas regras de negócio e processamento) possui testes unitários, tendo isso em vista:
-- Melhorar cobertura de testes, com mais cenários e abranger o módulo controller
+No momento, apenas o módulo de serviço (responsável pelas regras de negócio e processamento) possui testes unitários, tendo isso em vista:
+- Melhorar cobertura de testes, com mais cenários e abrangendo o módulo controller
 - Testes de integração para a camada Model (módulos model e repository)
 
 ### Organização e Qualidade
 
-O projeto no momento não conta com ambientes de desenvolvimento e nem esteiras para deploy com CI/CD, logo:
+O projeto, no momento, não conta com ambientes de desenvolvimento nem esteiras para deploy com CI/CD, logo:
 - Implementação de ambientes (desenvolvimento, homologação e produção)
 - Implementação de esteira no GitHub para deploy nos ambientes divididos em branches
 - Aplicação de CI/CD para garantir a integridade dos ambientes
-- Aplicação de sonar para code smells e cobertura de testes
+- Aplicação de Sonar para code smells e cobertura de testes
 
 ### AWS
 
 Apesar do projeto estar funcionando em ambiente cloud, alguns pontos podem ser melhorados:
 - Melhoria da estrutura de arquitetura de cloud
 - Criação de repositório de infraestrutura em Terraform para provisionamento e maior flexibilidade/manutenção de serviços na AWS
-- Utilizar serviço Secret Manager para trafego de senhas
+- Utilizar serviço Secret Manager para tráfego de senhas
 - Criar hierarquia de usuários na plataforma
 - Registro de novo domínio no Route 53 para utilização dos endpoints via URL mais acessível
